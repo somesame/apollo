@@ -4,7 +4,7 @@ jdk:
 notification:
   email:
     recipients:
-      - song_s@ctrip.com,zhanglea@ctrip.com
+      - 1828566287@qq.com
     on_success: always
     on_failure: always
 
@@ -30,9 +30,9 @@ env:
 addons:
   coverity_scan:
     project:
-      name: "ctripcorp/apollo"
+      name: "somesame/apollo"
       description: "Build submitted via Travis CI"
-    notification_email: song_s@ctrip.com,zhanglea@ctrip.com
+    notification_email: 1828566287@qq.com
     build_command_prepend: "mvn clean"
     build_command: "mvn -DskipTests=true compile"
     branch_pattern: master
