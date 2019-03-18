@@ -9,7 +9,7 @@
 	<name>Apollo</name>
 	<packaging>pom</packaging>
 	<description>Ctrip Configuration Center</description>
-	<url>https://ctripcorp.github.io/apollo</url>
+	<url>https://somesame.github.io/apollo</url>
 
 	<organization>
 		<name>Ctrip, Inc.</name>
@@ -24,19 +24,19 @@
 	</licenses>
 
 	<scm>
-		<url>https://github.com/ctripcorp/apollo</url>
-		<connection>scm:git:git://github.com/ctripcorp/apollo.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com/ctripcorp/apollo.git</developerConnection>
+		<url>https://github.com/somesame/apollo</url>
+		<connection>scm:git:git://github.com/somesame/apollo.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/somesame/apollo.git</developerConnection>
 	</scm>
 
 	<ciManagement>
 		<system>Travis CI</system>
-		<url>https://travis-ci.org/ctripcorp/apollo</url>
+		<url>https://travis-ci.org/somesame/apollo</url>
 	</ciManagement>
 
 	<issueManagement>
 		<system>github</system>
-		<url>https://github.com/ctripcorp/apollo/issues</url>
+		<url>https://github.com/somesame/apollo/issues</url>
 	</issueManagement>
 
 	<developers>
