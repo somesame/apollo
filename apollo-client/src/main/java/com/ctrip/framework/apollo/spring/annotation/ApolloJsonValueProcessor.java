@@ -1,7 +1,6 @@
 package com.ctrip.framework.apollo.spring.annotation;
 
 import com.ctrip.framework.apollo.build.ApolloInjector;
-import com.ctrip.framework.apollo.spring.property.AutoUpdateConfigChangeListener;
 import com.ctrip.framework.apollo.spring.property.PlaceholderHelper;
 import com.ctrip.framework.apollo.spring.property.SpringValue;
 import com.ctrip.framework.apollo.spring.property.SpringValueRegistry;
@@ -9,7 +8,6 @@ import com.ctrip.framework.apollo.spring.util.SpringInjector;
 import com.ctrip.framework.apollo.util.ConfigUtil;
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
@@ -67,7 +65,7 @@ public class ApolloJsonValueProcessor extends ApolloProcessor implements BeanFac
       Set<String> keys = placeholderHelper.extractPlaceholderKeys(placeholder);
       for (String key : keys) {
         SpringValue springValue = new SpringValue(key, placeholder, bean, beanName, field, true);
-        springValueRegistry.register(key, springValue);
+        springValueRegistry.register(beanFactory, key, springValue);
         logger.debug("Monitoring {}", springValue);
       }
     }
@@ -104,7 +102,7 @@ public class ApolloJsonValueProcessor extends ApolloProcessor implements BeanFac
       for (String key : keys) {
         SpringValue springValue = new SpringValue(key, apolloJsonValue.value(), bean, beanName,
             method, true);
-        springValueRegistry.register(key, springValue);
+        springValueRegistry.register(beanFactory, key, springValue);
         logger.debug("Monitoring {}", springValue);
       }
     }

@@ -1,11 +1,9 @@
 package com.ctrip.framework.apollo.spring.property;
 
 import com.ctrip.framework.apollo.ConfigChangeListener;
-import com.ctrip.framework.apollo.build.ApolloInjector;
 import com.ctrip.framework.apollo.enums.PropertyChangeType;
 import com.ctrip.framework.apollo.model.ConfigChange;
 import com.ctrip.framework.apollo.model.ConfigChangeEvent;
-import com.ctrip.framework.apollo.spring.annotation.SpringValueProcessor;
 import com.ctrip.framework.apollo.spring.util.SpringInjector;
 import com.google.gson.Gson;
 import java.lang.reflect.Field;
@@ -53,38 +51,16 @@ public class AutoUpdateConfigChangeListener implements ConfigChangeListener{
     }
     for (String key : keys) {
       // 1. check whether the changed key is relevant
-      Collection<SpringValue> targetValues = springValueRegistry.get(key);
+      Collection<SpringValue> targetValues = springValueRegistry.get(beanFactory, key);
       if (targetValues == null || targetValues.isEmpty()) {
         continue;
       }
 
-      // 2. check whether the value is really changed or not (since spring property sources have hierarchies)
-      if (!shouldTriggerAutoUpdate(changeEvent, key)) {
-        continue;
-      }
-
-      // 3. update the value
+      // 2. update the value
       for (SpringValue val : targetValues) {
         updateSpringValue(val);
       }
     }
-  }
-
-  /**
-   * Check whether we should trigger the auto update or not.
-   * <br />
-   * For added or modified keys, we should trigger auto update if the current value in Spring equals to the new value.
-   * <br />
-   * For deleted keys, we will trigger auto update anyway.
-   */
-  private boolean shouldTriggerAutoUpdate(ConfigChangeEvent changeEvent, String changedKey) {
-    ConfigChange configChange = changeEvent.getChange(changedKey);
-
-    if (configChange.getChangeType() == PropertyChangeType.DELETED) {
-      return true;
-    }
-
-    return Objects.equals(environment.getProperty(changedKey), configChange.getNewValue());
   }
 
   private void updateSpringValue(SpringValue springValue) {
